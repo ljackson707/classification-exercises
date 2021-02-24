@@ -9,10 +9,6 @@ from aquire import get_iris_data
 from sklearn.model_selection import train_test_split
 from sklearn.impute import SimpleImputer
 
-
-df = get_iris_data()
-df.info()
-
 def clean_iris(df):
     '''
     clean_iris will take in one arg. df a pandas dataframe, anticipated to be the iris dataset
