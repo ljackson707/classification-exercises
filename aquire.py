@@ -40,7 +40,17 @@ def get_iris_data(cached=False):
     write it to a csv file, and returns the df.
     '''
     # Create SQL query.
-    sql_query = 'SELECT * FROM species'
+    sql_query = """
+                SELECT species_id,
+                species_name,
+                sepal_length,
+                sepal_width,
+                petal_length,
+                petal_width
+                FROM measurements
+                JOIN species
+                USING(species_id)
+                """
     
     # Read in DataFrame from Codeup db.
     df = pd.read_sql(sql_query, get_connection('iris_db'))
