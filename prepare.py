@@ -13,28 +13,35 @@ from sklearn.impute import SimpleImputer
 df = get_iris_data()
 df.info()
 
-def clean_iris():
-    dropcols = ['species_id']
+def clean_iris(df):
+    '''
+    clean_iris will take in one arg. df a pandas dataframe, anticipated to be the iris dataset
+    and will remove species_id and measurement_id columns,
+    rename species_name to species
+    encode species into two new columns
+    
+    return a single pandas dataframe with the above operations preformed
+    '''
+    dropcols = ['species_id', 'measurement_id']
     df.drop(columns = dropcols, inplace = True)
     df.rename(columns = {'species_name':'species'}, inplace = True)
     dummies = pd.get_dummies(df[['species']], drop_first = True)
     return pd.concat([df, dummies], axis = 1)
 
-def impute_mode():
+def prep_iris(df):
     '''
-    impute mode for species 
+    prep_iris will take one arg. df, a pandas dataframe, anticipated to be the iris dataset 
+    and will remove species_id and measurement_id columns,
+    rename species_name to species
+    encode species into two new columns
+    
+    preform a train, validate, and test split
+    
+    return three pandas dataframes, train, validate, test
     '''
-    imputer = SimpleImputer(strategy='most_frequent')
-    train[['species']] = imputer.fit_transform(train[['species']])
-    validate[['species']] = imputer.transform(validate[['species']])
-    test[['species']] = imputer.transform(test[['species']])
-    return train, validate, test
-
-def prep_iris_data():
-    train, validate, test = train_test_split(df, test_size=.50, random_state=123, stratify=df.species)
-    train, validate = train_test_split(train_validate,
-                                       test_size=.50, 
-                                       random_state=123, 
-                                       stratify=train_validate.species)
-    train, validate, test = impute_mode()
+    df = clean_iris(df)
+    # test 
+    train_validate, test = train_test_split(df, test_size = 0.2, random_state= 1349, stratify = df.species)
+    # train and validate
+    train, validate = train_test_split(train_validate, train_size=.70, random_state=1349, stratify=train_validate.species)
     return train, validate, test
