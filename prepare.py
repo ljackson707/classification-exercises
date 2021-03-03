@@ -118,7 +118,7 @@ def get_metrics_binary_clf(clf):
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Binary output for rf
 
-    def get_metrics_binary_rf(rf):
+def get_metrics_binary_rf(rf):
     '''
     get_metrics_binary takes in a confusion matrix (cnf) for a binary classifier and prints out metrics based on
     values in variables named X_train, y_train, and y_pred.
