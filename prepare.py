@@ -78,13 +78,13 @@ def train_validate_test_split_i(df, seed=123):
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #Split function
 
-def split(df, stratify_by=None):
+def split(df, stratify_by='survived'):
     """
     Crude train, validate, test split
     To stratify, send in a column name
     """
     
-    if stratify_by == None:
+    if stratify_by == 'survived':
         train, test = train_test_split(df, test_size=.3, random_state=123)
         train, validate = train_test_split(df, test_size=.3, random_state=123)
     else:
@@ -173,3 +173,4 @@ def prep_iris(df):
     # train and validate
     train, validate = train_test_split(train_validate, train_size=.70, random_state=1349, stratify=train_validate.species)
     return train, validate, test
+
